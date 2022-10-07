@@ -10,6 +10,7 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat.getSystemService
+import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 import org.json.JSONObject
 import java.lang.Exception
@@ -32,6 +33,11 @@ class MyArrayAdapter(private val context: Context,
         dataSource.add(item)
         notifyDataSetChanged()
     }
+    fun removeItem(index: Int){
+        dataSource.removeAt(index)
+        notifyDataSetChanged()
+    }
+
     fun removeAll(){
         dataSource = arrayListOf()
     }
@@ -55,7 +61,7 @@ class MyArrayAdapter(private val context: Context,
                 .centerCrop().into(imageView)
         } else {
             Picasso.get().load(rowItem[2] as String).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).resize(50, 50)
-                .centerCrop().into(imageView)
+                .centerCrop().memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE).into(imageView)
         }
 
         return rowView

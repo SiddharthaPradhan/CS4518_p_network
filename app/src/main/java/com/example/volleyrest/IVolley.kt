@@ -8,7 +8,8 @@ interface IVolley {
 
 
     fun onResponse(response:String)
-    fun onResponse(response: VolleyError) // handle network errors
+    fun onResponse(response: VolleyError) // handle  errors
     fun onResponseGet(response:JSONArray) // handle multiple record get
     fun onResponseGet(response: JSONObject) // handler single record get
+    fun onResponse(response: JSONObject) // handler single record put
 }
