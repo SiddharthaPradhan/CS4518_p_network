@@ -2,14 +2,13 @@ package com.example.volleyrest
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.util.Log
 import android.util.LruCache
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
-import com.android.volley.toolbox.ImageLoader
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
+import com.android.volley.toolbox.*
+import org.json.JSONArray
 
 class MyVolleyRequest {
 
@@ -17,7 +16,6 @@ class MyVolleyRequest {
     private var context: Context?=null
     private var iVolley:IVolley?=null
     var imageLoader: ImageLoader?=null
-    get
 
     val requestQueue:RequestQueue
     get(){
@@ -27,19 +25,19 @@ class MyVolleyRequest {
             return nRequestQueue!!
     }
 
-    private constructor(context:Context,iVolley:IVolley){
+    private constructor(context:Context, iVolley:IVolley){
         this.context = context
         this.iVolley = iVolley
         nRequestQueue = requestQueue
         this.imageLoader = ImageLoader(nRequestQueue,object:ImageLoader.ImageCache{
             private val mCache = LruCache<String,Bitmap>(10)
             override fun getBitmap(url: String?): Bitmap? {
-                TODO("Not yet implemented")
+
                 return mCache.get(url)
             }
 
             override fun putBitmap(url: String?, bitmap: Bitmap?) {
-                TODO("Not yet implemented")
+
                 mCache.put(url, bitmap)
             }
 
@@ -52,28 +50,45 @@ class MyVolleyRequest {
         this.imageLoader = ImageLoader(nRequestQueue,object:ImageLoader.ImageCache{
             private val mCache = LruCache<String,Bitmap>(10)
             override fun getBitmap(url: String?): Bitmap? {
-                TODO("Not yet implemented")
+
                 return mCache.get(url)
             }
 
             override fun putBitmap(url: String?, bitmap: Bitmap?) {
-                TODO("Not yet implemented")
+
                 mCache.put(url, bitmap)
             }
 
         })
     }
 
-    fun<T> addToRequestQueue(req: Request<T>){
+    private fun<T> addToRequestQueue(req: Request<T>){
         requestQueue.add(req);
-
     }
 
     //GET METHOD
     fun getRequest(url:String){
-        val getRequest = JsonObjectRequest(Request.Method.GET, url, null, Response.Listener{
-            response -> iVolley!!.onResponse(response.toString())
-        }, Response.ErrorListener { error -> iVolley!!.onResponse(error.message!!) })
+        val getRequest = object: JsonArrayRequest(Method.GET, url,  null, Response.Listener {
+                response ->
+            run {
+                iVolley!!.onResponseGet(response)
+            }
+        },
+            Response.ErrorListener { error -> iVolley!!.onResponse(error!!.message!!)}){}
+
+        addToRequestQueue(getRequest)
+    }
+
+    //GET METHOD to find particular record
+    fun getRequest(url:String, id:Int){
+        val getRequest = object: JsonObjectRequest(Method.GET, "$url/$id",  null, Response.Listener {
+                response ->
+            run {
+                iVolley!!.onResponse(response.toString())
+            }
+        },
+            Response.ErrorListener { error -> iVolley!!.onResponse(error!!.message!!)}){}
+
         addToRequestQueue(getRequest)
     }
 
@@ -131,9 +146,9 @@ class MyVolleyRequest {
     }
 
     fun deleteRequest(url:String){
-       val deleteRequest = StringRequest(Request.Method.DELETE, url, Response.Listener{
+       val deleteRequest = StringRequest(Request.Method.DELETE, url, {
            response -> iVolley!!.onResponse(response)
-       }, Response.ErrorListener { error -> iVolley!!.onResponse(error.message!!) })
+       }, { error -> iVolley!!.onResponse(error.message!!) })
         addToRequestQueue(deleteRequest)
     }
 
