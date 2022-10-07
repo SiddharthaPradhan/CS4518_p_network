@@ -6,62 +6,81 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/patch"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/getContainer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="304dp"
-        android:layout_marginTop="16dp"
-        android:text="patch"
+        android:layout_marginBottom="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/get"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="GET"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/getRequestIdEditText"
+            android:layout_width="267dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter ID to lookup"
+            android:inputType="number" />
 
-    <Button
-        android:id="@+id/post"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="16dp"
-        android:text="Post"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/put"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="208dp"
-        android:layout_marginTop="16dp"
-        android:text="put"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                android:id="@+id/get"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="end"
+                android:text="Search"
+                />
 
-    <Button
-        android:id="@+id/delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="84dp"
-        android:text="delete"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
+
+        <!--    <Button-->
+<!--        android:id="@+id/patch"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="304dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:text="patch"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/post"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="112dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:text="Post"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/put"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="208dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:text="put"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/delete"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="160dp"-->
+<!--        android:layout_marginTop="84dp"-->
+<!--        android:text="delete"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <ListView
         android:id="@+id/getList"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/delete" />
+        app:layout_constraintTop_toBottomOf="@id/getContainer" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

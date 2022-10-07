@@ -74,7 +74,7 @@ class MyVolleyRequest {
                 iVolley!!.onResponseGet(response)
             }
         },
-            Response.ErrorListener { error -> iVolley!!.onResponse(error!!.message!!)}){}
+            Response.ErrorListener { error -> iVolley!!.onResponse(error)}){}
 
         addToRequestQueue(getRequest)
     }
@@ -84,10 +84,17 @@ class MyVolleyRequest {
         val getRequest = object: JsonObjectRequest(Method.GET, "$url/$id",  null, Response.Listener {
                 response ->
             run {
-                iVolley!!.onResponse(response.toString())
+                iVolley!!.onResponseGet(response)
             }
-        },
-            Response.ErrorListener { error -> iVolley!!.onResponse(error!!.message!!)}){}
+        },Response.ErrorListener {
+                error ->
+            run {
+                iVolley!!.onResponse(error)
+            }
+
+
+
+        }){}
 
         addToRequestQueue(getRequest)
     }
@@ -97,7 +104,7 @@ class MyVolleyRequest {
         Response.Listener {
             response -> iVolley!!.onResponse(response.toString())
 
-        }, Response.ErrorListener { error -> iVolley!!.onResponse(error.message!!)})
+        }, Response.ErrorListener { error -> iVolley!!.onResponse(error)})
         {
             override fun getParams(): MutableMap<String, String>? {
                 val params = HashMap<String, String>()
@@ -115,7 +122,7 @@ class MyVolleyRequest {
             Response.Listener {
                     response -> iVolley!!.onResponse(response.toString())
 
-            }, Response.ErrorListener { error -> iVolley!!.onResponse(error.message!!)})
+            }, Response.ErrorListener { error -> iVolley!!.onResponse(error)})
         {
             override fun getParams(): MutableMap<String, String>? {
                 val params = HashMap<String, String>()
@@ -133,7 +140,7 @@ class MyVolleyRequest {
             Response.Listener {
                     response -> iVolley!!.onResponse(response.toString())
 
-            }, Response.ErrorListener { error -> iVolley!!.onResponse(error.message!!)})
+            }, Response.ErrorListener { error -> iVolley!!.onResponse(error)})
         {
             override fun getParams(): MutableMap<String, String>? {
                 val params = HashMap<String, String>()
@@ -148,7 +155,7 @@ class MyVolleyRequest {
     fun deleteRequest(url:String){
        val deleteRequest = StringRequest(Request.Method.DELETE, url, {
            response -> iVolley!!.onResponse(response)
-       }, { error -> iVolley!!.onResponse(error.message!!) })
+       }, { error -> iVolley!!.onResponse(error) })
         addToRequestQueue(deleteRequest)
     }
 

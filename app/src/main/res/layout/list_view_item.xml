@@ -11,23 +11,20 @@
         android:layout_height="50dp"
         android:id="@+id/thumbnail"
         android:layout_gravity="center"
-        />
+        android:contentDescription="Thumbnail" />
 
     <TextView
         android:layout_marginStart="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/idText"
-        android:text="0"
-        android:layout_gravity="center"
-        />
+        android:layout_gravity="center"/>
 
     <TextView
         android:layout_marginStart="10dp"
         android:id="@+id/nameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Placeholder Title"
         android:layout_gravity="center"/>
 
 

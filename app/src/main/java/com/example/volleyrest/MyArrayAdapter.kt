@@ -49,9 +49,7 @@ class MyArrayAdapter(private val context: Context,
         val imageView = rowView.findViewById(R.id.thumbnail) as ImageView
         val rowItem = getItem(p0) as Array<*>
         idTextView.text = rowItem[0] as String
-        println(idTextView.text)
         nameTextView.text = rowItem[1] as String
-        println(nameTextView.text)
         if(rowItem[2] as String == ""){
             Picasso.get().load(R.mipmap.ic_launcher).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).resize(50, 50)
                 .centerCrop().into(imageView)
